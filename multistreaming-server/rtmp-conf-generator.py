@@ -31,7 +31,7 @@ RTMP_TRANSCODE_AUDIO_OPTS_CUSTOM = (
 PUSH_URL_RESTREAM = 'rtmp://live.restream.io/live/%%STREAM_KEY%%' # Restream let's you stream to LinkedIn Live
 PUSH_URL_YOUTUBE = 'rtmp://a.rtmp.youtube.com/live2/%%STREAM_KEY%%'
 PUSH_URL_FACEBOOK = 'rtmp://127.0.0.1:19350/rtmp/%%STREAM_KEY%%'
-PUSH_URL_TWITCH = 'rtmp://live-cdg.twitch.tv/app/%%STREAM_KEY%%'
+PUSH_URL_TWITCH = 'rtmp://%%REGION_CODE%%.contribute.live-video.net/app/%%STREAM_KEY%%'
 PUSH_URL_INSTAGRAM = 'rtmp://127.0.0.1:19351/rtmp/%%STREAM_KEY%%'
 PUSH_URL_PERISCOPE = 'rtmp://%%REGION_CODE%%.pscp.tv:80/x/%%STREAM_KEY%%'
 PUSH_URL_MICROSOFT_STREAM = '%%RTMP_URL%% app=live/%%APP_NAME%%'
@@ -41,7 +41,7 @@ PUSH_URL_DLIVE = 'rtmp://stream.dlive.tv/live/%%STREAM_KEY%%'
 
 DEFAULT_TRANSCODE_CONFIG = {
     'pixels': '1280x720',
-    'videoBitRate': '4500k',
+    'videoBitRate': '6000k',
     'videoFrameRate': 60,
     'keyFrames': 60,
     'audioOpts': '-c:a copy',
@@ -73,6 +73,9 @@ def generatePlatormPushURL(block_config):
             '%%STREAM_KEY%%', block_config['streamKey']
         )
     elif block_config['platform'] == 'twitch':
+        region_code = (
+            block_config['regionCode'] if 'regionCode' in block_config else 'fra06'
+        )        
         push_url = PUSH_URL_TWITCH.replace('%%STREAM_KEY%%', block_config['streamKey'])
     elif block_config['platform'] == 'instagram':
         # must push through stunnel. Push through Instagram stunnel port.
