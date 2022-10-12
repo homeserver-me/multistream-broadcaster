@@ -83,6 +83,12 @@ Here is an example of the JSON configuration file:
       "streamKey": "abc123"
     },
     {
+      "name": "twitch",
+      "regionCode": "fra06",
+      "platform": "twitch",
+      "streamKey": "abc123"
+    },    
+    {
       "name": "facebook-1",
       "platform": "facebook",
       "streamKey": "def456",
